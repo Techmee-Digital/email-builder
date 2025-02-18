@@ -52,10 +52,10 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         value={value.top}
         setValue={(num) => handleChange('top', num)}
         units="px"
-        step={4}
+        step={1}
         min={0}
         max={80}
-        marks
+        // marks
       />
 
       <RawSliderInput
@@ -63,10 +63,10 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         value={value.bottom}
         setValue={(num) => handleChange('bottom', num)}
         units="px"
-        step={4}
+        step={1}
         min={0}
         max={80}
-        marks
+        // marks
       />
 
       <RawSliderInput
@@ -74,10 +74,10 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         value={value.left}
         setValue={(num) => handleChange('left', num)}
         units="px"
-        step={4}
+        step={1}
         min={0}
         max={80}
-        marks
+        // marks
       />
 
       <RawSliderInput
@@ -85,10 +85,10 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         value={value.right}
         setValue={(num) => handleChange('right', num)}
         units="px"
-        step={4}
+        step={1}
         min={0}
         max={80}
-        marks
+        // marks
       />
     </Stack>
   );

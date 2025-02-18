@@ -92,8 +92,10 @@ export default function TemplatePanel() {
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || `Failed to save campaign: ${response.statusText}`);
-      }  
+      } 
       console.log('Campaign saved successfully!');
+      // Redirect to the campaign page using the campaignId
+      window.location.href = `http://127.0.0.1:5000/campaigns`;
     } catch (error) {
       if (error instanceof Error) {
         console.error('Error saving campaign:', error.message);
@@ -102,6 +104,7 @@ export default function TemplatePanel() {
       }
     }    
   };
+  
 
   let mainBoxSx: SxProps = {
     height: '100%',
@@ -174,7 +177,7 @@ export default function TemplatePanel() {
           <Stack direction="row" spacing={2}>
             <DownloadJson />
             {/* <ImportJson /> */}
-            <Button variant="contained" color="primary" onClick={handleDoneClick}> Done </Button>
+            <Button variant="contained" color="primary" onClick={handleDoneClick}> Save </Button>
             <ToggleButtonGroup value={selectedScreenSize} exclusive size="small" onChange={handleScreenSizeChange}>
               <ToggleButton value="desktop">
                 <Tooltip title="Desktop view">

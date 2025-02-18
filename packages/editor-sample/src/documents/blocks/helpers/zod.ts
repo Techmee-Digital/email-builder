@@ -11,7 +11,7 @@ export function zFontFamily() {
 }
 
 export function zFontWeight() {
-  return z.enum(['bold', 'normal']);
+  return z.enum(['bold', 'normal', 'italic']);
 }
 
 export function zTextAlign() {
