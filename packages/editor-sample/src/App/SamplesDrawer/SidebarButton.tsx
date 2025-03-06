@@ -21,7 +21,7 @@ export default function SidebarButton({ href, children, ...rest }: SidebarButton
     if (href.startsWith(prefix)) {
       const blockId = href.substring(prefix.length);
       try {
-        const response = await fetch(`http://127.0.0.1:5000/blocks/${blockId}`, {
+        const response = await fetch(`https://emailbuilder.acumendashboards.com/blocks/${blockId}`, {
           credentials: 'include',
         });
         if (!response.ok) {

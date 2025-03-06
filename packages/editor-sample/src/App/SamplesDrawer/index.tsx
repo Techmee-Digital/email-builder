@@ -18,7 +18,7 @@ export default function BlocksDrawer() {
 
   const fetchBlocks = useCallback(async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/blocks', {
+      const response = await fetch('https://emailbuilder.acumendashboards.com/blocks', {
         credentials: 'include',
       });
       if (!response.ok) {
@@ -45,7 +45,7 @@ export default function BlocksDrawer() {
 
   const handleDelete = async (blockId: number) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/blocks/${blockId}`, {
+      const response = await fetch(`https://emailbuilder.acumendashboards.com/blocks/${blockId}`, {
         method: 'DELETE',
         credentials: 'include',
       });

@@ -1,0 +1,41 @@
+.gallery-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  
+  .gallery-thumbnail:hover {
+    border-color: #007BFF;
+  }
+  
+  .gallery-item {
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .gallery-filename {
+    font-size: 0.8rem;
+    margin-top: 4px;
+    color: #333;
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Visually hidden for accessibility */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  

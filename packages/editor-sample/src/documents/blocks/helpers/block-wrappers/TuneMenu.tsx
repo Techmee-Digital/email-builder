@@ -191,7 +191,7 @@ export default function TuneMenu({ blockId }: Props) {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/blocks', {
+      const response = await fetch('https://emailbuilder.acumendashboards.com/blocks', {
         method: 'POST',
         credentials: 'include',
         headers: {

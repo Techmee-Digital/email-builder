@@ -34,29 +34,29 @@ export default function TemplatePanel() {
         // Validate campaign ID
         if (isNaN(campaignId)) {
           console.error('Invalid campaign ID');
-          window.location.href = 'http://127.0.0.1:5000/campaigns';
+          window.location.href = 'https://emailbuilder.acumendashboards.com/campaigns';
           return;
         }
         // Fetch the campaign data
-        const response = await fetch(`http://127.0.0.1:5000/get-campaign/${campaignId}`, {
+        const response = await fetch(`https://emailbuilder.acumendashboards.com/get-campaign/${campaignId}`, {
           credentials: 'include', // Include session cookies
         });
         // Handle unauthorized access
         if (response.status === 401) {
           console.warn('Unauthorized access, redirecting to login page.');
-          window.location.href = 'http://127.0.0.1:5000/'; // Redirect to login
+          window.location.href = 'https://emailbuilder.acumendashboards.com/'; // Redirect to login
           return;
         }
         // Handle forbidden access
         if (response.status === 403) {
           console.warn('Access forbidden, redirecting to campaigns page.');
-          window.location.href = 'http://127.0.0.1:5000/campaigns'; // Redirect to campaigns page
+          window.location.href = 'https://emailbuilder.acumendashboards.com/campaigns'; // Redirect to campaigns page
           return;
         }
         // Handle invalid campaigns
         if (response.status === 404) {
           console.warn('Access forbidden, redirecting to campaigns page.');
-          window.location.href = 'http://127.0.0.1:5000/campaigns'; // Redirect to campaigns page
+          window.location.href = 'https://emailbuilder.acumendashboards.com/campaigns'; // Redirect to campaigns page
           return;
         }
         // Handle other errors
@@ -76,7 +76,7 @@ export default function TemplatePanel() {
   const handleDoneClick = async () => {
     const markup = renderToStaticMarkup(document, { rootBlockId: 'root' });
     try {
-      const response = await fetch('http://127.0.0.1:5000/save_campaign', {
+      const response = await fetch('https://emailbuilder.acumendashboards.com/save_campaign', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json', 
@@ -95,7 +95,7 @@ export default function TemplatePanel() {
       } 
       console.log('Campaign saved successfully!');
       // Redirect to the campaign page using the campaignId
-      window.location.href = `http://127.0.0.1:5000/campaigns`;
+      window.location.href = `https://emailbuilder.acumendashboards.com/campaigns`;
     } catch (error) {
       if (error instanceof Error) {
         console.error('Error saving campaign:', error.message);
