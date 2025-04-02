@@ -13,7 +13,45 @@ interface IBlock {
 }
 
 export default function BlocksDrawer() {
+  // Determine if we're in share link mode by checking the URL.
+  const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+  const isSharedFlow = pathSegments[0] === 'share' && !!pathSegments[1];
+
   const samplesDrawerOpen = useSamplesDrawerOpen();
+
+  // If in share mode, immediately render a Drawer with a message.
+  if (isSharedFlow) {
+    return (
+      <Drawer
+        variant="persistent"
+        anchor="left"
+        open={samplesDrawerOpen}
+        sx={{
+          width: samplesDrawerOpen ? SAMPLES_DRAWER_WIDTH : 0,
+        }}
+      >
+        <Stack
+          spacing={3}
+          py={1}
+          px={2}
+          width={SAMPLES_DRAWER_WIDTH}
+          justifyContent="space-between"
+          height="100%"
+        >
+          <Stack spacing={2}>
+            <Typography variant="h6" component="h1" sx={{ p: 0.75 }}>
+              Blocks
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Blocks are not available in shared mode.
+            </Typography>
+          </Stack>
+        </Stack>
+      </Drawer>
+    );
+  }
+
+  // Otherwise, in normal mode, fetch and render blocks.
   const [blocks, setBlocks] = useState<IBlock[]>([]);
 
   const fetchBlocks = useCallback(async () => {
@@ -97,7 +135,6 @@ export default function BlocksDrawer() {
                     },
                   }}
                 >
-                  {/* Single-line styling for the block name */}
                   <SidebarButton
                     href={`#db/${block.id}`}
                     sx={{
@@ -106,7 +143,7 @@ export default function BlocksDrawer() {
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       textAlign: 'left',
-                      mr: 1, // spacing to the icon
+                      mr: 1,
                     }}
                   >
                     {block.name}
