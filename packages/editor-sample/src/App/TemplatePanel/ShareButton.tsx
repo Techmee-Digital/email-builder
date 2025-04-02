@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem, Snackbar, Tooltip, Box, Typography } from '@mui/material';
+import React, { useState, useRef } from 'react';
+import { IconButton, Menu, MenuItem, Snackbar, Tooltip, Box, Typography, Button } from '@mui/material';
 import { IosShareOutlined } from '@mui/icons-material';
 import ContentCopyOutlined from '@mui/icons-material/ContentCopyOutlined';
 
@@ -12,6 +12,7 @@ export default function ShareButton({ campaignId }: ShareButtonProps) {
   // Store the generated share link
   const [shareLink, setShareLink] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Open the share menu.
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -61,7 +62,7 @@ export default function ShareButton({ campaignId }: ShareButtonProps) {
   };
 
   return (
-    <>
+    <Box sx={{ position: 'relative' }} ref={containerRef}>
       <IconButton onClick={handleClick}>
         <Tooltip title="Share current template">
           <IosShareOutlined fontSize="small" />
@@ -75,40 +76,70 @@ export default function ShareButton({ campaignId }: ShareButtonProps) {
           Share Edit Link
         </MenuItem>
       </Menu>
+      
       <Snackbar
-  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-  open={shareLink !== null}
-  onClose={handleCloseSnackbar}
-  autoHideDuration={6000}
-  message={
-    <Box
-      sx={{
-        backgroundColor: 'white',
-        border: '1px solid rgb(29, 106, 189)',
-        padding: '8px 22px',
-        borderRadius: '4px',
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <Typography variant="body2" sx={{ mr: 1 }}>
-        {shareLink}
-      </Typography>
-      <Typography variant="body2" sx={{ mx: 1 }}>
-        |
-      </Typography>
-      <IconButton size="small" onClick={handleCopy}>
-        <ContentCopyOutlined fontSize="small" />
-      </IconButton>
+        open={shareLink !== null}
+        onClose={handleCloseSnackbar}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // This will be overridden by sx
+        sx={{
+          position: 'absolute', 
+          top: '100%',
+          left: 0,
+          right: 'auto',
+          bottom: 'auto',
+          transform: 'none',
+          width: 'auto',
+          maxWidth: '90%',
+          mt: 2, // margin top
+        }}
+        message={
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              border: '1px solid rgb(29, 106, 189)',
+              padding: '8px 12px',
+              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              color: 'black',
+            }}
+          >
+            <Box sx={{ 
+              flexGrow: 1, 
+              overflow: 'hidden', 
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              mr: 2
+            }}>
+              <Typography variant="body2">
+                {shareLink}
+              </Typography>
+            </Box>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={handleCopy}
+              sx={{
+                minWidth: 'auto',
+                padding: '4px 8px',
+                backgroundColor: 'rgb(29, 106, 189)',
+                '&:hover': {
+                  backgroundColor: 'rgb(21, 85, 156)',
+                },
+              }}
+            >
+              <ContentCopyOutlined fontSize="small" />
+            </Button>
+          </Box>
+        }
+        ContentProps={{
+          sx: {
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+          },
+        }}
+      />
     </Box>
-  }
-  ContentProps={{
-    sx: {
-      backgroundColor: 'transparent',
-      boxShadow: 'none',
-    },
-  }}
-/>
-    </>
   );
 }
